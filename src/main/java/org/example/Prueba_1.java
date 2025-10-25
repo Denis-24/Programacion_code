@@ -12,10 +12,13 @@ public class Prueba_1 {
         int limite_1 = 0;
         int limite_2 = 0;
 
+        System.out.println("-------------------");
         System.out.println("!Validador de ISBN!");
+        System.out.println("-------------------");
         System.out.println("(1) Validar ISBN");
         System.out.println("(2) Reparar ISBN");
         System.out.println("(3) Salir");
+        System.out.println("-------------------");
         System.out.println("Introduce el modo...");
 
 
@@ -30,8 +33,11 @@ public class Prueba_1 {
         if (control){
             switch (modo){
                 case 1:
-                    System.out.println("Introduce el ISBN para validar.");
+                    System.out.println("Bienvenido, introduce el ISBN para poder validarlo.");
                     String validar = teclado.next();
+
+                    //Haggo esto para que si escriben la X en minuscula se ponga automaticamente en mayuscula para que no haya ningun problema.
+                    String validar_mayucula = validar.toUpperCase();
 
                     limite_1 = validar.length();
 
@@ -42,8 +48,9 @@ public class Prueba_1 {
                     int suma = 0;
 
                     for (int i = 0; i < 10; i++) {
-                        char c = validar.charAt(i);
+                        char c = validar_mayucula.charAt(i);
                         int valor;
+
 
                         // Si es 'X' en la última posición, vale 10
                         if (c == 'X' && i == 9) {
@@ -67,16 +74,30 @@ public class Prueba_1 {
 
                     break;
                 case 2:
-                    System.out.println("Introduce el ISBN para reparar.");
+                    System.out.println("Bienvenido, introduce el ISBN el cual quieres reparar.");
                     String reparar = teclado.next();
 
                     limite_2 = reparar.length();
+
+                    if (limite_2 > limite || limite_2 < limite){
+                        System.out.println("ISBN introducido es incorrecto.");
+                    } else if (reparar.equals("?")) {
+
+
+                    }
+                    int posicion = reparar.indexOf("?");
+                    System.out.println(posicion);
+
+                    for (int i = 0; i< 10; i++){
+                        System.out.println(reparar.charAt(i));
+                    }
 
                     if (limite_2 < limite || limite_2 > limite){
                         System.out.println("ISBN introducido incorrecto.");
                     }
                     break;
                 case 3:
+                    System.out.println("Saliendo...");
                     break;
             }
         }
