@@ -55,6 +55,8 @@ public class Prueba_1 {
                         int peso = 10 - i; // pesos de 10 a 1
                         int producto = valor * peso;
 
+                        suma += producto;
+
                     }
 
                     if (suma % 11 == 0) {
@@ -62,7 +64,6 @@ public class Prueba_1 {
                     } else {
                         System.out.println("El ISBN no es valido.");
                     }
-                    System.out.println("hola");
 
                     break;
                 case 2:
