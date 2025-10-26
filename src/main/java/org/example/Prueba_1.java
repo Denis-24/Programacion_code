@@ -9,8 +9,8 @@ public class Prueba_1 {
         int modo = 0;
         String isbn_ejemplo = "xxxxxxxxxx";
         int limite = isbn_ejemplo.length();
-        int limite_1 = 0;
-        int limite_2 = 0;
+        int limite_1;
+        int limite_2;
 
         System.out.println("-------------------");
         System.out.println("!Validador de ISBN!");
@@ -47,12 +47,12 @@ public class Prueba_1 {
 
                     int suma = 0;
 
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i< limite_1; i++){
                         char c = validar_mayucula.charAt(i);
                         int valor;
 
 
-                        // Si es 'X' en la última posición, vale 10
+                        // Si es X en la ultima posicion, vale 10
                         if (c == 'X' && i == 9) {
                             valor = 10;
                         } else {
@@ -63,7 +63,6 @@ public class Prueba_1 {
                         int producto = valor * peso;
 
                         suma += producto;
-
                     }
 
                     if (suma % 11 == 0) {
@@ -73,29 +72,61 @@ public class Prueba_1 {
                     }
 
                     break;
+
                 case 2:
                     System.out.println("Bienvenido, introduce el ISBN el cual quieres reparar.");
                     String reparar = teclado.next();
+
+                    String reparar_mayuscula = reparar.toUpperCase();
 
                     limite_2 = reparar.length();
 
                     if (limite_2 > limite || limite_2 < limite){
                         System.out.println("ISBN introducido es incorrecto.");
-                    } else if (reparar.equals("?")) {
-
-
                     }
                     int posicion = reparar.indexOf("?");
-                    System.out.println(posicion);
 
-                    for (int i = 0; i< 10; i++){
-                        System.out.println(reparar.charAt(i));
+                    int posicion_1 = reparar.lastIndexOf("?");
+
+                    if (posicion != posicion_1){
+                        System.out.println("ISBN introducido es incorrecto.");
+                        break;
                     }
 
-                    if (limite_2 < limite || limite_2 > limite){
-                        System.out.println("ISBN introducido incorrecto.");
+                    for (int j = 0; j<10; j++){
+                        int suma_1 = 0;
+                        boolean valido = true;
+
+                        for (int i = 0; i< limite_2; i++){
+                            char c = reparar_mayuscula.charAt(i);
+                            int valor = 0;
+
+                            if (posicion == c){
+                                valor = j;
+                            }else if (c == 'X' && i == 9){
+                                valor = 10;
+                            }else if (c >= '0' && c <= '9' ){
+                                valor = Integer.parseInt(String.valueOf(c));
+                            }else{
+                                System.out.println("Valores introducidos incorrectos");
+                                valido = false;
+                            }
+
+                            int peso = 10 - i;
+                            suma_1 += valor * peso;
+
+                        }
+                        if (valido && suma_1 % 11 == 0 ){
+                            if (j == 10 && posicion_1 == 9){
+                                System.out.println("El digito que falta es X");
+                            }else {
+                                System.out.println("el digito que falta es " + j);
+                            }
+                        }
+                        return;
                     }
                     break;
+
                 case 3:
                     System.out.println("Saliendo...");
                     break;
